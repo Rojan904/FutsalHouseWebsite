@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    {% for tr in train1 %}
+    <div class="row training-img"><img src={{tr.imgfirst.url}} style="width:100%;"></div>
+    {% endfor %}
+    <h1 style="text-align:center;">Choose your package here</h1>
+    <div class="row train-second">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10 form-group">
+            <div class="card-deck">
+                <div class="card">
+                    {% for tr in train1 %}
+                    <img src={{tr.imgsec.url}} class="card-img-top" alt="...">
+                    {% endfor %}
+                    <div class="card-body">
+                        {% for t in train2 %}
+                        <h5 class="card-title">{{t.head1}}</h5>
+                        <p class="card-text">{{t.paraf1}}</p>
+                        <p>{{t.paraf2}}</p>
+                        <p>{{t.paraf3}}</p>
+                        {% endfor %}
+                        <a href="../register" class="btn btn-primary">Grab it</a>
+                    </div>
+                </div>
+                <div class="card">
+                    {% for tr in train1 %}
+                    <img src={{tr.imgthird.url}} class="card-img-top" alt="...">
+                    {% endfor %}
+                    <div class="card-body">
+                        {% for t in train2 %}
+                        <h5 class="card-title">{{t.head2}}</h5>
+                        <p class="card-text">{{t.paras1}} </p>
+                        <p>{{t.paras2}}</p>
+                        <p>{{t.paras3}}</p>
+                        {% endfor %}
+                        <a href="../register" class="btn btn-primary">Grab it</a>
+                    </div>
+                </div>
+                <div class="card">
+                    {% for tr in train1 %}
+                    <img src={{tr.imgfour.url}} class="card-img-top" alt="...">
+                    {% endfor %}
+                    <div class="card-body">
+                        {% for t in train2 %}
+                        <h5 class="card-title">{{t.head3}}</h5>
+                        <p class="card-text">{{t.parat1}}</p>
+                        <p>{{t.parat2}}</p>
+                        <p>{{t.parat3}} </p>
+                        {% endfor %}
+                        <a href="../register" class="btn btn-primary">Grab it</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+
+</div>
+
+{% endblock %}

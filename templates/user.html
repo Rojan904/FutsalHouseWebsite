@@ -1,0 +1,331 @@
+<!doctype html>
+
+{% load static %}
+{% static "assets" as baseUrl %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!--bootstrap css file-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+    <!--fontawesome css file for icon-->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!--custom css-->
+    <link rel="stylesheet" href="{%static 'css/style.css' %}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="../home">Futsal Book Development</a>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Book Game
+        </button>
+    </div>
+    <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Book Futsal</button>-->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="color: black;"></span>
+    </button>
+
+    <div class="mr-5"></div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+            <li><a>{{request.user}}</a></li>
+            <li><a href="/logout">Logout</a></li>
+            {% else %}
+            <li><a href="../home">Home</a></li>
+            <li><a href="../training">Training</a></li>
+            <li><a href="../gallery">Gallery</a></li>
+            <li><a href="../event">Events</a></li>
+            <li><a href="../register">Sign Up</a></li>
+            <li><a href="../login">Login</a></li>
+            {% endif %}
+            </li>
+        </ul>
+
+    </div>
+</nav>
+<!-- The Modal for add game -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Book a Game</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form method="post" name="add">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="email" name="email">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="title" class="col-sm-2 col-form-label">Contact Number</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="title" name="contact">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="boxed" class="col-sm-2 col-form-label">Date</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="boxed" name="date">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="boxed1" class="col-sm-2 col-form-label">Time</label>
+                        <div class="col-sm-10">
+                            <div class="select-option" id="boxed1" name="time">
+                            <!--<div class="select-option" class="form-control" id="boxed1">-->
+                                <select name="time" class="form-control">
+                                    <option value="6">6 am to 7 am</option>
+                                    <option value="7">7 am to 8 am</option>
+                                    <option value="8">8 am to 9 am</option>
+                                    <option value="9">9 am to 10 am</option>
+                                    <option value="10">10 am to 11 am</option>
+                                    <option value="11">11 am to 12 pm</option>
+                                    <option value="12">12 pm to 1 pm</option>
+                                    <option value="13">1 pm to 2 pm</option>
+                                    <option value="14">2 pm to 3 pm</option>
+                                    <option value="15">3 pm to 4 pm</option>
+                                    <option value="16">4 pm to 5 pm</option>
+                                    <option value="17">5 pm to 6 pm</option>
+                                    <option value="18">6 pm to 7 pm</option>
+                                    <option value="19">7 pm to 8 pm</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <input type="submit" value="Save" class="btn btn-primary" name="add">
+
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+
+        </div>
+    </div>
+</div>
+<!-- The Modal for add game -->
+
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-lg-12 table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact No.</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Edit</th>
+                    <td>Delete</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for b in booking %}
+                <tr>
+                    <td>{{ b.name }}</td>
+                    <td>{{ b.email}}</td>
+                    <td>{{ b.contact }}</td>
+                    <td>{{ b.date }}</td>
+                    <td>{{ b.time }}:00</td>
+
+                    <td>
+                        <a href="#" data-toggle="modal" data-target="#edit{{ b.id }}" class="btn btn-success" onclick="showTime({{ booking.0 }},{{ b.time }})">Edit</a>
+
+                    </td>
+                    <td>
+                        <a href="/delete/{{ b.id }}" class="btn btn-danger">Delete</a>
+
+                    </td>
+                </tr>
+                <div class="container">
+                    <div class="row">
+                        <div class="modal" id="edit{{ b.id }}">
+
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Book a Game</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <form method="post" name="add">
+                                            {% csrf_token %}
+                                            <div class="form-group row">
+                                                <label for="id" class="col-sm-2 col-form-label">Id</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" value="{{b.id}}" id="id"
+                                                           name="id">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="name1" class="col-sm-2 col-form-label">Name</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" value="{{b.name}}"
+                                                           id="name1" name="name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="email1" class="col-sm-2 col-form-label">Email</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" value="{{b.email}}"
+                                                           id="email1" name="email">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="title1" class="col-sm-2 col-form-label">Contact
+                                                    Number</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" value="{{b.contact}}"
+                                                           id="title1" name="contact">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group row">
+                                                <label for="boxed3" class="col-sm-2 col-form-label">Date</label>
+                                                <div class="col-sm-10">
+                                                    <input type="date" class="form-control" value="{{b.date}}"
+                                                           id="boxed3" name="date">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="boxed4" class="col-sm-2 col-form-label">Time</label>
+                                                <div class="col-sm-10">
+                                                    <input class="select-option" value="{{b.time}}" id="boxed4"
+                                                           name="time">
+                                                    <div class="select-option">
+                                                        <select name="time" class="form-control">
+
+                                                            <option value="7" >7 am to 8 am</option>
+                                                            <option value="8">8 am to 9 am</option>
+                                                            <option value="9">9 am to 10 am</option>
+                                                            <option value="10">10 am to 11 am</option>
+                                                            <option value="11">11 am to 12 pm</option>
+                                                            <option value="12">12 pm to 1 pm</option>
+                                                            <option value="13">1 pm to 2 pm</option>
+                                                            <option value="14">2 pm to 3 pm</option>
+                                                            <option value="15">3 pm to 4 pm</option>
+                                                            <option value="16">4 pm to 5 pm</option>
+                                                            <option value="17">5 pm to 6 pm</option>
+                                                            <option value="18">6 pm to 7 pm</option>
+                                                            <option value="19">7 pm to 8 pm</option>
+
+                                                        </select>
+
+                                                   </div>
+                                                </div>
+                                                <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                <input type="submit" value="Save" class="btn btn-primary" name="ud">
+                                            </div>
+
+                                        </form>
+                                        <script>
+                                        function showTime(bn,time)
+                                        {
+                                            document.getElementsByClassName("op"+time)[bn].selected = true;
+                                        }
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<footer class="footer-bs" style="margin-top:200px;">
+    <div class="row">
+        <div class="col-lg-3 footer-brand animated fadeInLeft">
+            <h2>FUTSAL HOUSE</h2>
+            <p>Enjoy the classic indoor football at Futsal House</p>
+            <p>Bouddha-06,Kathmandu,Nepal</p>
+            <p>FUTSAL HOUSE &copy 2020, All rights reserved</p>
+        </div>
+        <div class="col-lg-4 footer-nav animated fadeInUp">
+            <h4>LINKS</h4>
+            <div class="col-md-6">
+                <ul class="pages">
+                    <li><a href="../home">Home</a></li>
+                    <li><a href="../gallery">Gallery</a></li>
+                    <li><a href="../event">Events</a></li>
+                    <li><a href="booking.html">Booking</a></li>
+
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-lg-2 footer-social animated fadeInDown">
+            <h4>Follow Us</h4>
+            <ul>
+                <li><a href="https://www.facebook.com">Facebook</a></li>
+                <li><a href="https://www.twitter.com">Twitter</a></li>
+                <li><a href="https://www.instagram.com">Instagram</a></li>
+
+            </ul>
+        </div>
+        <div class="col-lg-3 footer-ns animated fadeInRight">
+            <h4>Email:</h4>
+            <p>General: house@futsal.np</p>
+            <p>Training: train@gmail.com</p>
+
+            <h4>Phone:</h4>
+            <p>General: 014489675</p>
+            <p>Training: 9823420729</p>
+            <p> Booking: 014489676</p>
+
+
+        </div>
+    </div>
+</footer>
+
+
+<!--jquery file-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
+

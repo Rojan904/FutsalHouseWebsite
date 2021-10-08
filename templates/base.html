@@ -1,0 +1,111 @@
+<!doctype html>
+{% load static %}
+{% static "assets" as baseUrl %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Futsal House</title>
+    <!--bootstrap css file-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!--fontawesome css file for icon-->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!--custom css-->
+    <link rel="stylesheet" href="{%static 'css/futsal.css' %}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+	  <a class="navbar-brand" href="../home">Futsal House </a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon" style="color: black;"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse " id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	      <li class="nav-item active">
+
+
+            {% if user.is_authenticated %}
+	            <li><a>{{request.user}}</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <!--<li><input type="button" data-toggle="modal" data-target="#myModal" value="Book"/></li>-->
+            {% else %}
+                <li><a href="../home">Home</a></li>
+	            <li><a href="../training">Training</a></li>
+	            <li><a href="../gallery">Gallery</a></li>
+	            <li><a href="../event">Events</a></li>
+
+                <li><a href="../register">Sign Up</a></li>
+                <li><a href="../login">Login</a></li>
+            {% endif %}
+	      </li>
+	    </ul>
+
+      </div>
+    </nav>
+{% block content %}
+
+{% endblock %}
+
+<footer class="footer-bs">
+        <div class="row">
+        	<div class="col-lg-3 footer-brand animated fadeInLeft">
+            	<h2>FUTSAL HOUSE</h2>
+                <p>Enjoy the classic indoor football at Futsal House</p>
+                <p>Bouddha-06,Kathmandu,Nepal</p>
+                <p>FUTSAL HOUSE &copy 2020, All rights reserved</p>
+            </div>
+        	<div class="col-lg-4 footer-nav animated fadeInUp">
+            	<h4>LINKS</h4>
+            	<div class="col-md-6">
+                    <ul class="pages">
+                        <li><a href="../home">Home</a></li>
+                        <li><a href="../gallery">Gallery</a></li>
+                        <li><a href="../event">Events</a></li>
+                        <li><a href="../register">Sign Up</a> </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        	<div class="col-lg-2 footer-social animated fadeInDown">
+            	<h4>Follow Us</h4>
+            	<ul>
+                	<li><a href="https://www.facebook.com">Facebook</a></li>
+                	<li><a href="https://www.twitter.com">Twitter</a></li>
+                	<li><a href="https://www.instagram.com">Instagram</a></li>
+
+                </ul>
+            </div>
+        	<div class="col-lg-3 footer-ns animated fadeInRight">
+            	<h4>Email:</h4>
+                <p>General: house@futsal.np</p>
+                <p>Training: train@gmail.com</p>
+
+                <h4>Phone:</h4>
+                <p>General: 014489675</p>
+                <p>Training: 9823420729</p>
+               	<p> Booking: 014489676</p>
+
+
+
+            </div>
+        </div>
+    </footer>
+
+
+<!--jquery file-->
+<script src="{%static 'js/jquery.3.4.1.js' %}"></script>
+<script sec="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!--custom java file-->
+<!--<script src="{%static 'js/custom_js.js' %}"></script>-->
+
+</body>
+</html>

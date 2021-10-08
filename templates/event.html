@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load static %}
+{% static "assets" as baseUrl %}
+{% block content %}
+
+ 	<div class="container-fluid">
+		<div class="row event-img">
+			<img src="{% static 'images/event.jpg' %}" style="width: 100%;">
+		</div>
+
+		<div class="row event-top">
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				<h1 style="text-align: center;">Events</h1>
+			</div>
+			
+		</div>
+
+		<div class="row event-mid">
+			<div class="col-lg-1 col-md-1 col-sm-1">
+				<button type="button" id="prev"
+                    class="btn btn-info"> Previous </button>
+			</div>
+			<div class="col-lg-10 col-md-10 col-sm-10"></div>
+			<div class="col-lg-1 col-md-1 col-sm-1">
+				<button type="button" id="next"
+                    class="btn btn-info"> Next </button>
+			</div>
+
+		</div> 
+
+
+		<div class="row event-bottom">
+			
+			
+			
+			<div class="col-lg-12">
+				<div id="div1" class="mydiv">
+					<div class="col-lg-1"></div>
+					<div class="col-lg-10 event">
+						<h1>1st NJFA RUNNING CUP 2020</h1>
+						<p>February 9,2020,Tokyo</p>
+						<h6>Fujimori Futsal Park,Tokyo-To</h6>
+						<p>Last date for entry team is January 31. Team entry fee is Yen 41,000. Winner will receive Yen 4,50,000 and runner ups will receive Yen 2,00,000.</p>
+						<section>---------------------------------------------------------------</section>
+
+						<h1>Futsal Kings</h1>
+						<p>2020,Kathmandu</p>
+						<h6>Futsal House,Bouddha</h6>
+						<p>Specific date for this tournament will be announced soon.After the complete arrangement of the tournament, date, prizes will be announced. </p>
+						<section>---------------------------------------------------------------</section>
+
+						<h1>Kathmandu Futsal Championship</h1>
+						<p>February 20,2020,Kathmandu</p>
+						<h6>Dhanyentari Futsal,Hadigaun,Dhumbarai</h6>
+						<p>Dhanyentari Futsal is going to organise Kathmandu Futsal Championship in association with Surya Futsal and Futsal House. The tournament sponsored by Red Bull will have ANFA members which will pick up best players.</p>
+						<section>---------------------------------------------------------------</section>
+
+					</div>
+					<div class="col-lg-1"></div>
+				</div>
+				<div id="div2" class="mydiv">
+					<div class="col-lg-1"></div>
+					<div class="col-lg-10 event">
+						<h1>Nepal Futsal Cup</h1>
+						<p>April 11,2020,Kathmandu</p>
+						<h6>United Futsal Nepal,Bafal, Behind Narayani Petrol Pump</h6>
+						<p>First Prize for this event is Rs 1,00,000 and 1st runner up will get Rs 50,000. Total participation team will be 25 with Rs 5,000 registration fee.</p>
+						<section>---------------------------------------------------------------</section>
+
+						<h1>Budhanilkantha Open Futsal Tournament</h1>
+						<p>Saturday 7 AM Onwards, Feb 7</p>
+						<h6>Hamro Futsal Arena,Kathmandu</h6>
+						<p>Winner: Rs 50,000 Runner-up: Rs 25,000 Register your team: +977 - 9861582968</p>
+						<section>---------------------------------------------------------------</section>
+
+						<h1>South Asia Futsal Championship</h1>
+						<p>June 6,2020,India</p>
+						<h6>Delhi Futsal,Delhi,</h6>
+						<p>India is organising South Asia Futsal Championship and Nepali futsal team is participating too. Lets wish the team will perform its best and bring the gold home.</p>
+						<section>---------------------------------------------------------------</section>
+
+					</div>
+					<div class="col-lg-1"></div>
+				
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		
+		<style>
+			#prev,#next{
+				background: silver;
+				margin-top: 5px;
+        }
+		
+        #div2
+        {
+        	display: none;
+        }
+    	</style>
+
+
+	</div>
+
+			
+		
+
+		
+
+	<section style="height:20px;"></section>
+		<script type="text/javascript" src="{% static 'js/jquery.3.4.1.js' %}">
+    		 $(document).ready(function(){
+                    $("#next").click(function(){
+                    	$("#div1").hide();
+                		$("#div2").show();
+               		 })
+             })
+
+    		 $(document).ready(function(){
+                    $("#prev").click(function(){
+                    	$("#div2").hide();
+                		$("#div1").show();
+               		 })
+             })
+
+    	</script>
+   
+
+
+	
+
+{% endblock %}

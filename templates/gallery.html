@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container-fluid">
+	    <div class="row">
+            <div class="column">
+                {% for gal in galery%}
+                <img src={{gal.img1.url}}>
+                <img src={{gal.img2.url}}>
+                <img src={{gal.img3.url}}>
+                <img src={{gal.img4.url}}>
+                <img src={{gal.img5.url}}>
+                {% endfor %}
+            </div>
+
+            <div class="column">
+                {% for gal in galery%}
+                <img src={{gal.img6.url}}>
+                <img src={{gal.img7.url}}>
+                <img src={{gal.img8.url}} >
+                <img src={{gal.img9.url}}>
+                {% endfor %}
+    
+            </div>
+
+            <div class="column">
+                {% for gal in galery%}
+                <img src={{gal.img10.url}}>
+                <img src={{gal.img11.url}}>
+                <img src={{gal.img12.url}}>
+                <img src={{gal.img13.url}}>
+                {% endfor %}
+            </div>
+
+            <div class="column">
+                {% for gal in galery%}
+                <img src={{gal.img14.url}}>
+                <img src={{gal.img15.url}}>
+                <img src={{gal.img16.url}}>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+   <section style="height:20px;"></section>
+  
+{% endblock %}
